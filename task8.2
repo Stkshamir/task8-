@@ -1,0 +1,98 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNEE+TO7ZacLf4eY+XrVFF7",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Stkshamir/task8-/blob/main/task8.2\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 373
+        },
+        "id": "k_QXVuM-LUM1",
+        "outputId": "07ccd438-3cc1-47f9-9aad-7bf80fab9866"
+      },
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "ModuleNotFoundError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-1-f7f948f3eca5>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mre\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0;32mimport\u001b[0m \u001b[0menchant\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      3\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0;31m# Initialize the spelling checker\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0md\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0menchant\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mDict\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"en_US\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m: No module named 'enchant'",
+            "",
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0;32m\nNOTE: If your import is failing due to a missing package, you can\nmanually install dependencies using either !pip or !apt.\n\nTo view examples of installing some common dependencies, click the\n\"Open Examples\" button below.\n\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n"
+          ],
+          "errorDetails": {
+            "actions": [
+              {
+                "action": "open_url",
+                "actionText": "Open Examples",
+                "url": "/notebooks/snippets/importing_libraries.ipynb"
+              }
+            ]
+          }
+        }
+      ],
+      "source": [
+        "import re\n",
+        "import enchant\n",
+        "\n",
+        "# Initialize the spelling checker\n",
+        "d = enchant.Dict(\"en_US\")\n",
+        "\n",
+        "# Define the function to correct spelling\n",
+        "def correct_spelling(text):\n",
+        "    # Split the text into words\n",
+        "    words = re.findall(r'\\b\\w+\\b', text)\n",
+        "    \n",
+        "    # Correct the spelling of each word\n",
+        "    corrected_words = [d.suggest(word)[0] if not d.check(word) else word for word in words]\n",
+        "    \n",
+        "    # Join the corrected words into a single string\n",
+        "    corrected_text = \" \".join(corrected_words)\n",
+        "    \n",
+        "    return corrected_text\n",
+        "\n",
+        "# Test the function with some examples\n",
+        "examples = [\n",
+        "    \"I hav a cat\",\n",
+        "    \"The cat sat on the mat\",\n",
+        "    \"I luv ice cream\",\n",
+        "    \"I hav a luvly cat\"\n",
+        "]\n",
+        "\n",
+        "for example in examples:\n",
+        "    corrected = correct_spelling(example)\n",
+        "    print(f\"Original: {example}\\nCorrected: {corrected}\\n\")"
+      ]
+    }
+  ]
+}
